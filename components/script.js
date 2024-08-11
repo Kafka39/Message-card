@@ -20,7 +20,7 @@ input.addEventListener('keydown', event => {
 		htmlElement = words
 			.map(word => {
 				if (isURL(word)) {
-					return `<a class="message_content-link" href="${word}"
+					return `<a class="message_content-link" target='_blank' href="${word} "
 				>${word}</a>`
 				}
 				return word
