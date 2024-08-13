@@ -1,5 +1,6 @@
 const input = document.querySelector('.card-input')
 const content = document.querySelector('.card_content-wrapper')
+const messageContainer = document.querySelector('.card-message_content')
 
 function isURL(value) {
 	try {
@@ -11,31 +12,31 @@ function isURL(value) {
 }
 
 input.addEventListener('keydown', event => {
-	const value = input.value
-	if (event.key === 'Enter') {
-		if (value.length === 0) return
-		event.preventDefault()
-		const words = value.split(' ')
+	const value = input.value.trim()
+	const words = value.split(' ')
 
-		htmlElement = words
-			.map(word => {
-				if (isURL(word)) {
-					return `<a class="message_content-link" target='_blank' href="${word} "
+	const htmlElement = words
+		.map(word => {
+			if (isURL(word)) {
+				return `<a class="message_content-link" target='_blank' href="${word} "
 				>${word}</a>`
-				}
-				return word
-			})
-			.join(' ')
+			}
+			return word
+		})
+		.join(' ')
 
+	if (event.key === 'Enter') {
+		event.preventDefault()
+		if (value.length === 0) return
 		content.innerHTML += `
-		
+
 		<div class="card-message_content">
-			<span class="message_content-span"
-			>
+			<span class="message_content-span">
 			${htmlElement}</span>
 		</div>
-		
 		`
 		input.value = ''
+		content.scrollTop = content.scrollHeight
+		// content.scrollHeight = content.scrollTop
 	}
 })

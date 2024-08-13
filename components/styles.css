@@ -14,8 +14,10 @@ body {
 }
 
 .card {
+	position: relative;
 	width: 400px;
 	min-height: 200px;
+	max-height: 500px;
 
 	background-color: #212121;
 	border-radius: 8px;
@@ -26,6 +28,9 @@ body {
 		color: aliceblue;
 	}
 	& .card-avatar {
+		transition: 1s;
+		display: block;
+
 		width: 50px;
 		height: 50px;
 		border-radius: 40%;
@@ -33,16 +38,27 @@ body {
 		border: 1px solid #000000;
 		box-shadow: 2px 2px 5px #00000065;
 
-		transition: border-radius 300ms;
+		transition: border-radius 300ms, transform 300ms;
+
 		&:hover {
-			border-radius: 30%;
+			transform: scale(1.1);
 		}
 	}
 	& .card-content {
 		display: flex;
 		align-items: center;
 
+		padding-bottom: 10px;
+		border-bottom: 1px solid #4d4d4d;
+
 		margin-bottom: 10px;
+		& .card-avatar-wrapper {
+			overflow: hidden;
+			border-radius: 40%;
+
+			width: 50px;
+			height: 50px;
+		}
 		& .card-container {
 			padding-left: 10px;
 		}
@@ -55,11 +71,6 @@ body {
 			font-size: 12px;
 			font-weight: 500;
 		}
-	}
-	& .line {
-		height: 1px;
-		background-color: #4d4d4d;
-		margin-bottom: 10px;
 	}
 	& .card-message_title {
 		color: #fff;
@@ -92,16 +103,27 @@ body {
 			}
 		}
 	}
+	& .card_content-wrapper {
+		margin-bottom: 40px;
+
+		max-height: 300px;
+
+		flex: 1 1 auto;
+		overflow-y: auto;
+
+		scroll-snap-align: end;
+	}
 	& .card-input {
+		position: absolute;
+		bottom: 0;
+		left: 0;
 		color: #c6dae6;
 
 		width: 100%;
 		font-size: 14px;
-		margin-top: 50px;
 
 		background-color: #0f0f0f;
-		padding: 10px;
-		border-radius: 8px;
-		border: 1px solid #4d4d4d;
+		padding: 15px;
+		border-radius: 0px 0px 8px 8px;
 	}
 }
