@@ -40,3 +40,27 @@ input.addEventListener('keydown', event => {
 		// content.scrollHeight = content.scrollTop
 	}
 })
+
+const btn = document.querySelector('.test_commit')
+const form = document.querySelector('.form')
+
+btn.addEventListener('click', event => {
+	event.preventDefault()
+
+	const formData = new FormData(form)
+
+	let valueObj = {}
+	for (let [name, value] of formData) {
+		valueObj[name] = value
+	}
+	console.log(valueObj)
+
+	content.innerHTML += `
+	<div class="card-message_content">
+			<span class="message_content-span">
+			<span class="_object">First name:</span> ${valueObj.input1} 
+			<br/>
+			<span class="_object">Last name:</span> ${valueObj.input2}</span>
+	</div>
+	`
+})
