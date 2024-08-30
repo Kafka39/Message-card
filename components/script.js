@@ -51,16 +51,34 @@ btn.addEventListener('click', event => {
 
 	let valueObj = {}
 	for (let [name, value] of formData) {
-		valueObj[name] = value
+		valueObj[name] = value.trim()
 	}
-	console.log(valueObj)
 
-	content.innerHTML += `
-	<div class="card-message_content">
-			<span class="message_content-span">
-			<span class="_object">First name:</span> ${valueObj.input1} 
-			<br/>
-			<span class="_object">Last name:</span> ${valueObj.input2}</span>
-	</div>
-	`
+	if (valueObj.input1 !== '' && valueObj.input2 !== '') {
+		content.innerHTML += `
+		<div class="card-message_content">
+				<span class="message_content-span">
+				<span class="_object">First name:</span> ${valueObj.input1} 
+				<br/>
+				<span class="_object">Last name:</span> ${valueObj.input2}</span>
+		</div>
+		`
+	}
 })
+
+async function jsonplaceholder() {
+	const data = await fetch('https://jsonplaceholder.typicode.com/posts').then(
+		response => response.json()
+	)
+
+	const limit = data.slice(0, 10)
+
+	limit.forEach(
+		title =>
+			(content.innerHTML += `
+		<div class="card-message_content">
+				<span class="message_content-span">${title.title}</span>
+		</div>`)
+	)
+}
+jsonplaceholder()
