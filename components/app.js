@@ -16,10 +16,6 @@ CONTACT = [
 	},
 ]
 
-app.get('/api/contacts', (req, res) => {
-	res.status(200).json(CONTACT)
-})
-
 /////////////////////////////////////////
 async function database() {
 	const { Client } = pg
@@ -33,12 +29,14 @@ async function database() {
 
 	await client.connect()
 
-	const res = await client.query(`SELECT * FROM users`)
-	console.log(res.rows)
+	return (rows = await client.query(`SELECT * FROM users`))
 
 	await client.end()
 }
 database()
+app.get('/api/contacts', (req, res) => {
+	res.status(200).json(rows.rows)
+})
 
 ////////////////////////////////////////////////////////////////
 app.use(express.static(path.resolve(__dirname, 'client')))

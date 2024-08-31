@@ -26,13 +26,14 @@ async function request(url, method = 'GET', data = null) {
 
 async function getContact() {
 	const data = await request('/api/contacts')
-	console.log(data)
 
-	content.innerHTML += `
+	data.forEach(element => {
+		content.innerHTML += `
 		<div class="card-message_content">
-				<span class="message_content-span">${data[0].last_name} no ${data[0].first_name}</span>
+				<span class="message_content-span">${element.first_name}</span>
 		</div>
 		`
+	})
 }
 getContact()
 
