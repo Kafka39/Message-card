@@ -6,15 +6,6 @@ const PORT = process.env.PORT || 3000
 const app = express()
 app.listen(PORT, () => `console.log(server started on port ${PORT})`)
 /////////////////////////////////////////
-
-CONTACT = [
-	{
-		id: 1,
-		first_name: 'Denis',
-		last_name: 'Oshi',
-		email: 'oshinodenis@gmail.com',
-	},
-]
 app.use(express.json())
 
 /////////////////////////////////////////
