@@ -79,7 +79,7 @@ input.addEventListener('keydown', event => {
 const btn = document.querySelector('.test_commit')
 const form = document.querySelector('.form')
 
-btn.addEventListener('click', event => {
+btn.addEventListener('click', async event => {
 	event.preventDefault()
 
 	const formData = new FormData(form)
@@ -89,11 +89,15 @@ btn.addEventListener('click', event => {
 		valueObj[name] = value.trim()
 	}
 
+	const response = await request('/api/contacts', 'POST', valueObj)
+
+	console.log(response)
+
 	if (valueObj.input1 !== '' && valueObj.input2 !== '') {
 		content.innerHTML += `
 		<div class="card-message_content">
 				<span class="message_content-span">
-				<span class="_object">First name:</span> ${valueObj.input1} 
+				<span class="_object">First name:</span> ${valueObj.input1}
 				<br/>
 				<span class="_object">Last name:</span> ${valueObj.input2}</span>
 		</div>

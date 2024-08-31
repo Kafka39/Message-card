@@ -15,6 +15,7 @@ CONTACT = [
 		email: 'oshinodenis@gmail.com',
 	},
 ]
+app.use(express.json())
 
 /////////////////////////////////////////
 async function database() {
@@ -28,6 +29,24 @@ async function database() {
 	})
 
 	await client.connect()
+
+	app.post('/api/contacts', async (req, res) => {
+		const { input1, input2 } = req.body;
+	
+		try {
+			// Вставляем данные без указания id
+			await client.query(
+				`INSERT INTO users (first_name, last_name, email) VALUES ($1, $2, $3)`,
+				[input1, input2, 'XZ@mail.ru']
+			);
+			console.log(req.body);
+			res.status(201).send('User added successfully');
+		} catch (error) {
+			console.error('Error inserting data:', error);
+			res.status(500).send('Server error');
+		}
+	});
+	
 
 	return (rows = await client.query(`SELECT * FROM users`))
 
